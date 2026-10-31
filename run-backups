@@ -125,9 +125,9 @@ system("/local/mysql/clean-backups");
 if ( !-e "/local/mysql-db-backups/skip-analyze" ) {
     print "Auto checking tables...\n";
     if ($database) {
-        system( "/local/mysql/sbin/wrap-exec", "mysqlcheck", "-a", $database );
+        system( "mysqlcheck", "-a", $database );
     }
     else {
-        system( "/local/mysql/sbin/wrap-exec", "mysqlcheck", "-A", "-a" );
+        system( "mysqlcheck", "-A", "-a" );
     }
 }
