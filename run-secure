@@ -35,14 +35,22 @@ if ( !$pw ) {
 }
 
 my ( $fh, $filename ) = tempfile();
-print $fh "grant super on *.* to root\@'%' identified by '$pw';\n";
-print $fh "grant super on *.* to root\@'localhost' identified by '$pw';\n";
-print $fh "grant super on *.* to root\@'127.0.0.1' identified by '$pw';\n";
+print $fh "create user root\@'%' identified by '$pw';\n";
+print $fh "create user root\@'localhost' identified by '$pw';\n";
+print $fh "create user root\@'127.0.0.1' identified by '$pw';\n";
+
+print $fh "alter user root\@'%' identified by '$pw';\n";
+print $fh "alter user root\@'localhost' identified by '$pw';\n";
+print $fh "alter user root\@'127.0.0.1' identified by '$pw';\n";
+
+print $fh "grant super on *.* to root\@'%';\n";
+print $fh "grant super on *.* to root\@'localhost';\n";
+print $fh "grant super on *.* to root\@'127.0.0.1';\n";
 
 #print $fh "flush privileges\n";
 close($fh);
 
-system("mysql < $filename");
+system("mysql -f < $filename");
 
 if ( !$saw_pw ) {
     umask(077);
