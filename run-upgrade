@@ -19,10 +19,10 @@ perl -pi -e "s/#*(wsrep_debug)/#\1/go" /local/mysql/mysql.conf
 
 /local/mysql/rc.mysqld
 
-sleep 10
-
-if [ -e "/local/mysql/cluster" ]; then
-	sleep 10
-fi
-
-/local/mysql/sbin/wrap-exec mysql-upgrade
+#sleep 10
+#
+#if [ -e "/local/mysql/cluster" ]; then
+#	sleep 10
+#fi
+#
+#/local/mysql/sbin/wrap-exec mysql-upgrade

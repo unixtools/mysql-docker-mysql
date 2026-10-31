@@ -2,7 +2,7 @@
 cd /local/mysql
 
 docker update --restart no mysql
-/local/mysql/sbin/wrap-exec mysqladmin --disable-ssl-verify-server-cert shutdown
+/local/mysql/sbin/wrap-exec mysqladmin shutdown
 docker stop mysql
 docker rm mysql
 
@@ -16,13 +16,9 @@ if [ -e /local/mysql/bootstrap -a -e /local/mysql/cluster ]; then
 	ARGS="$ARGS --wsrep_cluster_address=gcomm://"
 fi
 
-# Create db if not present
-#if [ ! -e /local/mysql/data/mysql/user.frm ]; then
-#    /local/mysql/sbin/wrap-run \
-#        mysql-upgrade \
-#		--defaults-extra-file=/local/mysql/mysql.conf \
-#		$ARGS
-#fi
+if [ ! -e /local/mysql/mysql.conf ]; then
+    cp /local/mysql/defaults.conf /local/mysql/mysql.conf
+fi
 
 /local/mysql/sbin/wrap-detach \
     mysqld \
