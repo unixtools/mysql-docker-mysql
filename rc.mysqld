@@ -2,7 +2,7 @@
 cd /local/mysql
 
 docker update --restart no mysql
-/local/mysql/sbin/wrap-exec mysql-admin --disable-ssl-verify-server-cert shutdown
+/local/mysql/sbin/wrap-exec mysqladmin --disable-ssl-verify-server-cert shutdown
 docker stop mysql
 docker rm mysql
 
@@ -17,21 +17,21 @@ if [ -e /local/mysql/bootstrap -a -e /local/mysql/cluster ]; then
 fi
 
 # Create db if not present
-if [ ! -e /local/mysql/data/mysql/user.frm ]; then
-    /local/mysql/sbin/wrap-run \
-        mariadb-upgrade \
-		--defaults-extra-file=/local/mysql/mysql.conf \
-		$ARGS
-fi
+#if [ ! -e /local/mysql/data/mysql/user.frm ]; then
+#    /local/mysql/sbin/wrap-run \
+#        mysql-upgrade \
+#		--defaults-extra-file=/local/mysql/mysql.conf \
+#		$ARGS
+#fi
 
 /local/mysql/sbin/wrap-detach \
-    mariadbd \
+    mysqld \
 	--defaults-extra-file=/local/mysql/mysql.conf \
 	--datadir=/local/mysql/data \
 	--explicit_defaults_for_timestamp \
 	$ARGS
 
-# add something here to wait until mariadb is running up to a limit?
+# add something here to wait until mysql is running up to a limit?
 
 if [ -e /local/mysql/bootstrap -a -e /local/mysql/cluster ]; then
 	rm -f /local/mysql/bootstrap
