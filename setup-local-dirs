@@ -164,14 +164,9 @@ system( "mkdir", "-p",  "/local/mysql-db-backups/data" );
 system( "mkdir", "-p",  "/local/mysql-db-backups/latest" );
 system( "chown", "-R",  "mysql:mysql", "/local/mysql" );
 
-# Make sure we have mysql client installed
+# Make sure we have a mysql client installed (whichever variant)
 if ( !-e "/usr/bin/mysql" ) {
-    if ( $os =~ /bookworm/ ) {
-        system( "apt-get", "-y", "install", "mariadb-client" );
-    }
-    else {
-        system( "apt-get", "-y", "install", "mysql-client" );
-    }
+    system( "apt-get", "-y", "install", "mysql-client" );
 }
 
 #

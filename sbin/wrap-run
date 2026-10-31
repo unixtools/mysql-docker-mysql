@@ -8,5 +8,5 @@ docker run \
   --name mysql \
   --network host \
   $ARGS \
-  mariadb:$TAG \
+  mysql:$TAG \
   "$@"

@@ -1,4 +1,8 @@
 #!/usr/bin/perl
+#
+
+# Have not done cluster support with the mysql variant yet
+exit(0);
 
 use strict;
 use File::Temp qw(tempfile);

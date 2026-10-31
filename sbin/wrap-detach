@@ -11,5 +11,5 @@ docker run \
   --log-opt max-file=10 \
   --ulimit nofile=16000:16000 \
   $ARGS \
-  mariadb:$TAG \
+  mysql:$TAG \
   "$@"
