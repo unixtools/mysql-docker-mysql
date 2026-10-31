@@ -28,7 +28,7 @@ ARGS="$ARGS -v /var/run/mysql:/var/run/mysql"
 ARGS="$ARGS -v /etc/localtime:/etc/localtime"
 
 # Allow bootstrapping
-ARGS="$ARGS -e MARIADB_ALLOW_EMPTY_ROOT_PASSWORD=1"
+ARGS="$ARGS -e MYSQL_ALLOW_EMPTY_PASSWORD=1"
 
 # Limits
 ARGS="$ARGS --ulimit nofile=16000:16000"
